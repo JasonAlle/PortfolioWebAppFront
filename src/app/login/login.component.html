@@ -1,0 +1,36 @@
+<div>
+  <div>
+    <div>
+      <h4>Login</h4>
+    </div>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div>
+        <label for="personName">Name</label>
+        <input
+          type="text"
+          formControlName="personName"
+          id="personName"
+          placeholder="Person Name"
+          autocomplete
+        />
+      </div>
+      <div>
+        <label for="personID">ID</label>
+        <input
+          type="text"
+          formControlName="personID"
+          id="personID"
+          placeholder="Person ID"
+        />
+      </div>
+    </form>
+    <p>
+      <button type="submit">
+        <i class="fas fa-save">Login</i>
+      </button>
+      <button (click)="onClearFields()">
+        <i class="fas fa-snowplow">Clear All</i>
+      </button>
+    </p>
+  </div>
+</div>

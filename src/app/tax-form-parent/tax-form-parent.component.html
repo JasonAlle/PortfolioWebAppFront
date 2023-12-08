@@ -1,0 +1,19 @@
+<div class="form-wrapper">
+  <ng-container [formGroup]="taxForm">
+    <!-- Person Info container -->
+    <app-tax-personinfo-child
+      formGroupName="personInfo"
+    ></app-tax-personinfo-child>
+    <!-- /Person Info container -->
+
+    <!-- address container -->
+    <!-- <app-basic-info formGroupName="basicInfo"></app-basic-info>
+   -->
+    <!-- /address container -->
+  </ng-container>
+
+  <pre style="margin-top: 50px; border: 1px solid red; width: fit-content">
+      {{ taxForm.value | json }}
+    </pre
+  >
+</div>
