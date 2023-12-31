@@ -6,10 +6,10 @@
       <div
         class="w-10 h-10 rounded-full bg-light-glow shadow-ring bg-[#ffffd0]"
       ></div>
-      <h1 class="text-white">Edit This Person's Info</h1>
-      <form [formGroup]="personForm" (ngSubmit)="editPerson()">
+      <h1 class="text-white">Give Info for Person POST</h1>
+      <form class="" [formGroup]="personForm" (ngSubmit)="createPerson()">
         <div class="flex flex-row gap-15 md:gap-1 justify-center items-center">
-          <mat-form-field class="form-field-margin">
+          <mat-form-field>
             <mat-label>Name</mat-label>
             <input
               type="text"
@@ -54,12 +54,11 @@
         <div class="flex flex-col gap-15 md:gap-1 justify-center items-center">
           <mat-card-footer>
             <button
-              color="primary"
-              [disabled]="!ageFormControl.valid || !nameFormControl.valid"
+              [disabled]="!nameFormControl.valid || !ageFormControl.valid"
               type="submit"
-              class="bg-[#673ab7] 2k:w-[1000px] md:w-[200px] w-[150px] 2k:h-[150px] md:h-[50px] h-[45px] m-[10px] rounded-lg text-white font-extrabold 2k:text-5xl md:text-2xl text-lg cursor-pointer disabled:opacity-25"
+              class="bg-[#673ab7] disabled:opacity-25 2k:w-[1000px] md:w-[200px] w-[150px] 2k:h-[150px] md:h-[50px] h-[45px] m-[10px] rounded-lg text-white font-extrabold 2k:text-5xl md:text-2xl text-lg cursor-pointer"
             >
-              Edit Person
+              Create Person
             </button>
           </mat-card-footer>
         </div>

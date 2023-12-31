@@ -1,19 +1,293 @@
-<div class="form-wrapper">
-  <ng-container [formGroup]="taxForm">
-    <!-- Person Info container -->
-    <app-tax-personinfo-child
-      formGroupName="personInfo"
-    ></app-tax-personinfo-child>
-    <!-- /Person Info container -->
-
-    <!-- address container -->
-    <!-- <app-basic-info formGroupName="basicInfo"></app-basic-info>
-   -->
-    <!-- /address container -->
-  </ng-container>
-
-  <pre style="margin-top: 50px; border: 1px solid red; width: fit-content">
-      {{ taxForm.value | json }}
-    </pre
+<div class="bg-[#50040c]">
+  <div
+    class="inset-0 max-w-7xl mx-auto items-center justify-center gap-5 md:mt-20 xxlsm:mt-10"
   >
+    <div class="flex flex-col gap-15 md:gap-1 justify-center items-center">
+      <div
+        class="w-10 h-10 rounded-full bg-light-glow shadow-ring bg-[#ffffd0]"
+      ></div>
+      <h1 class="text-white">Complete Tax Form</h1>
+      <form [formGroup]="step1TaxForm" (ngSubmit)="onTaxSubmit()">
+        <!-- General Tax Information Container-->
+        <mat-card>
+          <mat-card-title>General Information</mat-card-title>
+          <!-- Tax year -->
+          <mat-form-field>
+            <mat-label>Tax Year</mat-label>
+            <input matInput placeholder="2022" [formControl]="taxYearFC" />
+            <mat-error *ngIf="taxYearFC.hasError('pattern')">
+              Year <strong>invalid</strong>
+            </mat-error>
+            <mat-error *ngIf="taxYearFC.hasError('required')">
+              Year <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </mat-card>
+        <!-- General Tax Information Container-->
+
+        <!-- Person Info container -->
+        <mat-card class="form-container" formGroupName="personInfo">
+          <mat-card-title>Person Information</mat-card-title>
+
+          <!-- First name -->
+          <mat-form-field>
+            <mat-label>Name</mat-label>
+            <!-- <input matInput placeholder="Ex. Jane" formControlName="name"/>-->
+            <input
+              type="text"
+              matInput
+              placeholder="Ex. Jane"
+              [formControl]="nameFC"
+            />
+            <mat-error *ngIf="nameFC.hasError('pattern')">
+              Name <strong>invalid</strong>
+            </mat-error>
+            <mat-error *ngIf="nameFC.hasError('required')">
+              Name <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+          <!-- /First name -->
+
+          <!-- Email -->
+          <mat-form-field>
+            <mat-label>E-mail</mat-label>
+            <input
+              matInput
+              placeholder="canada@tax.com"
+              [formControl]="emailFC"
+            />
+            <mat-error *ngIf="emailFC.hasError('email')">
+              Email <strong>invalid</strong>
+            </mat-error>
+            <mat-error *ngIf="emailFC.hasError('required')">
+              Email <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+          <!-- /Email -->
+        </mat-card>
+        <!-- /Person Info container -->
+
+        <!-- address container -->
+        <mat-card class="form-container" formGroupName="addressInfo">
+          <mat-card-title>Address Information</mat-card-title>
+
+          <!--Mail Address -->
+          <mat-form-field>
+            <mat-label>Mail Address</mat-label>
+            <input
+              matInput
+              placeholder="123 Street"
+              [formControl]="mailAddFC"
+            />
+            <mat-error *ngIf="mailAddFC.hasError('pattern')">
+              Address <strong>invalid</strong>
+            </mat-error>
+            <mat-error *ngIf="mailAddFC.hasError('required')">
+              Address <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+          <!-- /First name -->
+
+          <!-- P.O. Box -->
+          <mat-form-field>
+            <mat-label>P.O. Box</mat-label>
+            <input matInput placeholder="182" formControlName="poBox" />
+          </mat-form-field>
+          <!-- /P.O. Box -->
+
+          <!-- RR -->
+          <mat-form-field>
+            <mat-label>Rural Route</mat-label>
+            <input matInput placeholder="3 County" formControlName="ruralR" />
+          </mat-form-field>
+          <!-- /RR -->
+        </mat-card>
+        <!-- /address container -->
+        <mat-card class="form-container" formGroupName="securityInfo">
+          <mat-card-title>Security Information</mat-card-title>
+
+          <!--ID -->
+          <mat-form-field>
+            <mat-label>ID#</mat-label>
+            <input matInput placeholder="123" [formControl]="idFC" />
+            <mat-error *ngIf="idFC.hasError('pattern')">
+              ID <strong>invalid</strong>
+            </mat-error>
+            <mat-error *ngIf="idFC.hasError('required')">
+              ID <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+          <!-- /ID -->
+
+          <!-- DOB -->
+          <mat-form-field>
+            <mat-label>Birth Day</mat-label>
+            <input
+              matInput
+              [matDatepicker]="dobPicker"
+              [formControl]="dobFC"
+              readonly
+            />
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle
+              matIconSuffix
+              [for]="dobPicker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #dobPicker disabled="false"></mat-datepicker>
+            <mat-error *ngIf="dobFC.hasError('pattern')">
+              Date <strong>invalid</strong>
+            </mat-error>
+            <mat-error *ngIf="dobFC.hasError('required')">
+              Date <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+          <!-- /DOB -->
+
+          <!-- Dead DOB -->
+          <mat-form-field>
+            <mat-label>Dead DOB</mat-label>
+            <input
+              matInput
+              [matDatepicker]="deadPicker"
+              formControlName="deadDOB"
+              readonly
+            />
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle
+              matIconSuffix
+              [for]="deadPicker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #deadPicker disabled="false"></mat-datepicker>
+          </mat-form-field>
+          <!-- /Dead DOB -->
+        </mat-card>
+        <mat-card class="form-container">
+          <mat-card-title>Marital Status Info</mat-card-title>
+          <mat-button-toggle-group formGroupName="maritalInfo">
+            <mat-button-toggle value="married">Married</mat-button-toggle>
+            <mat-button-toggle value="commonLaw">Common Law</mat-button-toggle>
+            <mat-button-toggle value="widowed">Widowed</mat-button-toggle>
+            <mat-button-toggle value="divorced">Divorced</mat-button-toggle>
+            <mat-button-toggle value="separated">Separated</mat-button-toggle>
+            <mat-button-toggle value="single">Single</mat-button-toggle>
+          </mat-button-toggle-group>
+        </mat-card>
+
+        <mat-card class="form-container">
+          <mat-card-title>Residence Information</mat-card-title>
+
+          <!--ProDec -->
+          <mat-form-field>
+            <mat-label>Province From December</mat-label>
+            <mat-select>
+              <mat-option
+                *ngFor="let province of provinceOptions"
+                [value]="province"
+              >
+                {{ province }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <!-- /ProDec -->
+
+          <!--ProNow -->
+          <mat-form-field>
+            <mat-label>Province Now</mat-label>
+            <mat-select [formControl]="provinceFC">
+              <mat-option
+                *ngFor="let province of provinceOptions"
+                [value]="province"
+              >
+                {{ province }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="provinceFC.hasError('required')">
+              Province <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+          <!-- /ProNow -->
+
+          <!--ProBus -->
+          <mat-form-field>
+            <mat-label>Province For Business</mat-label>
+            <mat-select>
+              <mat-option
+                *ngFor="let province of provinceOptions"
+                [value]="province"
+              >
+                {{ province }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <!-- /ProBus -->
+        </mat-card>
+
+        <mat-card class="form-container">
+          <mat-card-title>Language Info</mat-card-title>
+          <mat-button-toggle-group formGroupName="languageInfo">
+            <mat-button-toggle value="english">English</mat-button-toggle>
+            <mat-button-toggle value="french">French</mat-button-toggle>
+          </mat-button-toggle-group>
+        </mat-card>
+
+        <mat-card class="form-container" formGroupName="canCitizenInfo">
+          <mat-card-title>Canadian Citizenship Info</mat-card-title>
+
+          <!--Gained Citizen -->
+          <mat-form-field>
+            <mat-label>Gained Citizenship</mat-label>
+            <input
+              matInput
+              [matDatepicker]="gainedPicker"
+              formControlName="becameCit"
+              readonly
+            />
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle
+              matIconSuffix
+              [for]="gainedPicker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #gainedPicker disabled="false"></mat-datepicker>
+          </mat-form-field>
+          <!-- /ID -->
+
+          <!-- Lost Citizen -->
+          <mat-form-field>
+            <mat-label>Lost Citizenship</mat-label>
+            <input
+              matInput
+              [matDatepicker]="lostPicker"
+              formControlName="stoppedCit"
+              readonly
+            />
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle
+              matIconSuffix
+              [for]="lostPicker"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #lostPicker disabled="false"></mat-datepicker>
+          </mat-form-field>
+          <!-- /DOB -->
+        </mat-card>
+        <div class="flex flex-col gap-15 md:gap-1 justify-center items-center">
+          <button
+            [disabled]="
+              !nameFC.valid ||
+              !emailFC.valid ||
+              !mailAddFC.valid ||
+              !idFC.valid ||
+              !provinceFC.valid ||
+              !taxYearFC.valid ||
+              !dobFC.valid
+            "
+            type="submit"
+            class="bg-[#673ab7] disabled:opacity-25 2k:w-[1000px] md:w-[200px] w-[150px] 2k:h-[150px] md:h-[50px] h-[45px] m-[10px] rounded-lg text-white font-extrabold 2k:text-5xl md:text-2xl text-lg cursor-pointer&quot;"
+          >
+            Submit
+          </button>
+        </div>
+      </form>
+      {{ error }}
+    </div>
+  </div>
 </div>

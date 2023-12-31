@@ -2,3 +2,26 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.textStandard {
+  color: white;
+  font-weight: 500;
+  font-size: 35px;
+}
+.shadow-ring {
+  box-shadow: 0 0 100px 10px rgb(255 252 208);
+}
+@media only screen and (min-width: 640px) {
+  .shadow-ring {
+    box-shadow: 0 0 100px 10px rgb(255 252 208);
+  }
+}

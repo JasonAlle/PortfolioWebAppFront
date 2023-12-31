@@ -177,6 +177,53 @@
   }
 </style>
 
-<div>
-  <router-outlet></router-outlet>
+<div
+  class="bg-gradient-to-b from-[#213478] to-[#10041d] w-full h-full relative mx-auto"
+>
+  <header>
+    <mat-toolbar color="primary">
+      Person CRUD Webapp With Tax Forms<br />
+
+      <button
+        class="space-button"
+        mat-stroked-button
+        disableRipple="true"
+        routerLink="/Login"
+      >
+        View Person
+      </button>
+      <button
+        class="space-left-button"
+        mat-stroked-button
+        disableRipple="true"
+        routerLink="/Signup"
+      >
+        Add Person
+      </button>
+    </mat-toolbar>
+  </header>
+  <div class="">
+    <div
+      class="inset-0 max-w-7xl mx-auto items-center justify-center gap-5 md:mt-20 xxlsm:mt-10"
+    >
+      <div class="flex flex-col gap-15 md:gap-1 justify-center items-center">
+        <div
+          class="w-10 h-10 rounded-full bg-light-glow shadow-ring bg-[#ffffd0]"
+        ></div>
+        <h1 class="text-white">Welcome <span class="text-[#915eff]"></span></h1>
+        <p class="textStandard text-white">
+          This is a portfolio piece. It connects to a database using a JavaEE
+          backend
+        </p>
+        <p
+          class="text-white font-medium lg:text-[35px] sm:text-[22px] md:text-[32px] xs:text-[20px] text-[17px] lg:leading-[50px] line-height-180%"
+        >
+          And uses an Angular frontend
+        </p>
+      </div>
+    </div>
+    <!-- The routed views render in the <router-outlet>-->
+
+    <router-outlet></router-outlet>
+  </div>
 </div>

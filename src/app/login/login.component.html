@@ -1,36 +1,64 @@
-<div>
-  <div>
-    <div>
-      <h4>Login</h4>
+<div class="">
+  <div
+    class="inset-0 max-w-7xl mx-auto items-center justify-center gap-5 md:mt-20 xxlsm:mt-10"
+  >
+    <div class="flex flex-col gap-15 md:gap-1 justify-center items-center">
+      <div
+        class="w-10 h-10 rounded-full bg-light-glow shadow-ring bg-[#ffffd0]"
+      ></div>
+      <h1 class="text-white">Type valid ID To View</h1>
+      <form [formGroup]="loginForm" (ngSubmit)="onLoginAttempt()">
+        <div class="flex flex-row gap-15 md:gap-1 justify-center items-center">
+          <mat-form-field>
+            <mat-label for="personID">ID </mat-label>
+            <input matInput placeholder="123" [formControl]="idFC" />
+            <mat-error *ngIf="idFC.hasError('pattern')">
+              ID <strong>invalid</strong>
+            </mat-error>
+            <mat-error *ngIf="idFC.hasError('required')">
+              ID <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div>
+          <button
+            [disabled]="!idFC.valid"
+            type="submit"
+            class="bg-[#673ab7] disabled:opacity-25 2k:w-[1000px] md:w-[200px] w-[150px] 2k:h-[150px] md:h-[50px] h-[45px] m-[10px] rounded-lg text-white font-extrabold 2k:text-5xl md:text-2xl text-lg cursor-pointer"
+          >
+            <i>Search</i>
+          </button>
+          <button
+            (click)="onClearFields()"
+            class="bg-[#673ab7] 2k:w-[1000px] md:w-[200px] w-[150px] 2k:h-[150px] md:h-[50px] h-[45px] m-[10px] rounded-lg text-white font-extrabold 2k:text-5xl md:text-2xl text-lg cursor-pointer"
+          >
+            <i class="fas fa-snowplow">Clear</i>
+          </button>
+        </div>
+      </form>
     </div>
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-      <div>
-        <label for="personName">Name</label>
-        <input
-          type="text"
-          formControlName="personName"
-          id="personName"
-          placeholder="Person Name"
-          autocomplete
-        />
-      </div>
-      <div>
-        <label for="personID">ID</label>
-        <input
-          type="text"
-          formControlName="personID"
-          id="personID"
-          placeholder="Person ID"
-        />
-      </div>
-    </form>
-    <p>
-      <button type="submit">
-        <i class="fas fa-save">Login</i>
-      </button>
-      <button (click)="onClearFields()">
-        <i class="fas fa-snowplow">Clear All</i>
-      </button>
-    </p>
+    <div>
+      <mat-table [dataSource]="dataSource">
+        <!-- ID Column -->
+        <ng-container matColumnDef="id">
+          <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
+          <mat-cell *matCellDef="let person">{{ person.id }}</mat-cell>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+          <mat-cell *matCellDef="let person">{{ person.name }}</mat-cell>
+        </ng-container>
+
+        <!-- Age Column -->
+        <ng-container matColumnDef="age">
+          <mat-header-cell *matHeaderCellDef>Age</mat-header-cell>
+          <mat-cell *matCellDef="let person">{{ person.age }}</mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+      </mat-table>
+    </div>
   </div>
 </div>

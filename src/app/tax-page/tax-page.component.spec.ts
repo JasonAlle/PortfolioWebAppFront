@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PersonAddComponent } from './person-add.component';
+import { TaxPageComponent } from './tax-page.component';
 
-describe('PersonAddComponent', () => {
-  let component: PersonAddComponent;
-  let fixture: ComponentFixture<PersonAddComponent>;
+describe('TaxPageComponent', () => {
+  let component: TaxPageComponent;
+  let fixture: ComponentFixture<TaxPageComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [PersonAddComponent]
+      declarations: [TaxPageComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(PersonAddComponent);
+    fixture = TestBed.createComponent(TaxPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

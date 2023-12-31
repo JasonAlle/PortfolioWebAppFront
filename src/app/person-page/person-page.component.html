@@ -1,1 +1,37 @@
-<p>person-page works!</p>
+<div class="">
+  <div
+    class="inset-0 max-w-7xl mx-auto items-center justify-center gap-5 md:mt-20 xxlsm:mt-10"
+  >
+    <div class="flex flex-col gap-15 md:gap-1 justify-center items-center">
+      <div
+        class="w-10 h-10 rounded-full bg-light-glow shadow-ring bg-[#ffffd0]"
+      ></div>
+      <h1 class="text-white">Person Information</h1>
+      <div *ngIf="person">
+        <!-- Displaying person data -->
+        <h1 class="text-white">Name: {{ person.name }}</h1>
+        <h1 class="text-white">Age: {{ person.age }}</h1>
+        <div>
+          <button
+            (click)="onEdit()"
+            class="bg-[#673ab7] 2k:w-[1000px] md:w-[200px] w-[150px] 2k:h-[150px] md:h-[50px] h-[45px] m-[10px] rounded-lg text-white font-extrabold 2k:text-5xl md:text-2xl text-lg cursor-pointer&quot;"
+          >
+            Edit Person
+          </button>
+          <button
+            (click)="onDelete()"
+            class="bg-[#673ab7] 2k:w-[1000px] md:w-[200px] w-[150px] 2k:h-[150px] md:h-[50px] h-[45px] m-[10px] rounded-lg text-white font-extrabold 2k:text-5xl md:text-2xl text-lg cursor-pointer&quot;"
+          >
+            Delete Person
+          </button>
+          <button
+            (click)="onTax()"
+            class="bg-[#673ab7] 2k:w-[1000px] md:w-[200px] w-[150px] 2k:h-[150px] md:h-[50px] h-[45px] m-[10px] rounded-lg text-white font-extrabold 2k:text-5xl md:text-2xl text-lg cursor-pointer&quot;"
+          >
+            Taxes
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

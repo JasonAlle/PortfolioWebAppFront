@@ -1,0 +1,54 @@
+<div class="">
+  <div
+    class="inset-0 max-w-7xl mx-auto items-center justify-center gap-5 md:mt-20 xxlsm:mt-10"
+  >
+    <div class="flex flex-col gap-15 md:gap-1 justify-center items-center">
+      <div
+        class="w-10 h-10 rounded-full bg-light-glow shadow-ring bg-[#ffffd0]"
+      ></div>
+      <h1 class="text-white">Taxes Connected To This Person</h1>
+      <mat-table [dataSource]="dataSource">
+        <!-- ID Column -->
+        <ng-container matColumnDef="id">
+          <mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
+          <mat-cell *matCellDef="let tax">{{ tax.id }}</mat-cell>
+        </ng-container>
+
+        <!-- Year Column -->
+        <ng-container matColumnDef="year">
+          <mat-header-cell *matHeaderCellDef>Year</mat-header-cell>
+          <mat-cell *matCellDef="let tax">{{ tax.taxYear }}</mat-cell>
+        </ng-container>
+
+        <!-- Amount Column -->
+        <ng-container matColumnDef="amount">
+          <mat-header-cell *matHeaderCellDef>Amount</mat-header-cell>
+          <mat-cell *matCellDef="let tax">{{ tax.taxAmount }}</mat-cell>
+        </ng-container>
+
+        <!-- Actions Column -->
+        <ng-container matColumnDef="actions">
+          <mat-header-cell *matHeaderCellDef></mat-header-cell>
+          <mat-cell *matCellDef="let tax">
+            <button
+              mat-button
+              (click)="onDeleteTaxForm(tax.id)"
+              [value]="tax.id"
+            >
+              Delete Form
+            </button>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+      </mat-table>
+      <button
+        (click)="goToTaxForm()"
+        class="bg-[#673ab7] 2k:w-[1000px] md:w-[200px] w-[150px] 2k:h-[150px] md:h-[50px] h-[45px] m-[10px] rounded-lg text-white font-extrabold 2k:text-5xl md:text-2xl text-lg cursor-pointer"
+      >
+        Create Tax Form
+      </button>
+    </div>
+  </div>
+</div>
