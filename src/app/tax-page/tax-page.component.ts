@@ -38,7 +38,7 @@ export class TaxPageComponent implements OnInit {
         console.log(error);
       },
       complete: () => {
-        this.router.navigate(['/Tax', this.personId!]);
+        this.router.navigate(['/PersonPage', this.personId!]);
       },
     });
   }

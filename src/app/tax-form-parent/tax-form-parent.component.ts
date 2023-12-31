@@ -18,7 +18,18 @@ import { PersonhttpService } from '../personhttp.service';
 })
 export class TaxFormParentComponent implements OnInit {
   step1TaxForm: FormGroup;
-  provinceOptions: string[] = ['ON', 'QU', 'BC'];
+  provinceOptions: string[] = [
+    'ON',
+    'QC',
+    'BC',
+    'NB',
+    'MB',
+    'NS',
+    'PE',
+    'SK',
+    'AB',
+    'NL',
+  ];
   response: any;
   error: any;
   personId!: number;
@@ -45,10 +56,10 @@ export class TaxFormParentComponent implements OnInit {
       Validators.required,
       Validators.pattern('^.{1,30}$'),
     ]);
-    this.idFC = new FormControl('', [
-      Validators.required,
-      Validators.pattern('^[0-9]{1,12}$'),
-    ]);
+    this.idFC = new FormControl(
+      (this.personId = parseInt(this.route.snapshot.paramMap.get('id')!, 10)),
+      [Validators.required, Validators.pattern('^[0-9]{1,12}$')]
+    );
     this.dobFC = new FormControl('', [Validators.required]);
     this.provinceFC = new FormControl('', [Validators.required]);
     this.taxYearFC = new FormControl('', [
@@ -121,7 +132,7 @@ export class TaxFormParentComponent implements OnInit {
         this.error = error.error;
       },
       complete: () => {
-        this.router.navigate(['/Login']);
+        this.router.navigate(['/Tax', this.personId!]);
       },
     });
   }
